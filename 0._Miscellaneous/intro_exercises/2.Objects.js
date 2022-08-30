@@ -16,14 +16,14 @@ const alienMessage = {
 
 
 // --------------------------------------
-// Exercise 3 - Add a property 
+// Exercise 3 - Add a key-value pair 
 
 const stackOverflow = {};
 
 // make a rule called isAllowed and let the value be true
 
 // --------------------------------------
-// Exercise 4 - Remove a property 
+// Exercise 4 - Remove a key-value pair 
 
 const thisSong = {
 	description: "The best song in the world."
