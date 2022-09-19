@@ -6,6 +6,8 @@ const app = express();
 // another way to import in a single line:
 // const app = require("express")();
 
+app.use(express.json());
+
 
 // route     // callback function
 app.get("/", (request, response) => {
@@ -43,6 +45,10 @@ app.get("/actors", (req, res) => {
     });
 });
 
+app.post("/actors", (req, res) => {
+    console.log(req.body);
+    res.send({ data: req.body });
+});
 
 
 app.listen(8080, () => {
