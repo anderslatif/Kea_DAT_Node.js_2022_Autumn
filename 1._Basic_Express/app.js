@@ -45,10 +45,24 @@ app.get("/actors", (req, res) => {
     });
 });
 
+// task define a route that returns the date
+
+// task how do you get the day and the month? 
+
+// console.log(Date.now())
+// console.log(new Date());
+// console.log(new Date().toLocaleString());
+
+// const days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+// console.log(days[new Date().getDay()]);
+
+// console.log(new Date().getMonth());
+
 app.post("/actors", (req, res) => {
     console.log(req.body);
     res.send({ data: req.body });
 });
+
 
 
 app.listen(8080, () => {
