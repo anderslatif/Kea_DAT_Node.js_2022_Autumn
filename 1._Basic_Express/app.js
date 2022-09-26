@@ -64,15 +64,10 @@ app.post("/actors", (req, res) => {
 });
 
 app.get("/lookunderthebed", (req, res) => {
-    /* assignment allow the user to define if they have a flaslight 
-        if they do then send the response "You are safe"
-        if they don't then redirect them to /monsters
-    */
-    
-
+    if (req.query.flashlight) {
+        return res.send({ message: "You are safe" });
+    }
     res.redirect("/monsters");
-
-    // res.send({ message: "Look under the bed." });
 });
 
 app.get("/monsters", (req, res) => {
