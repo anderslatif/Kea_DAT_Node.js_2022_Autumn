@@ -63,6 +63,21 @@ app.post("/actors", (req, res) => {
     res.send({ data: req.body });
 });
 
+app.get("/lookunderthebed", (req, res) => {
+    /* assignment allow the user to define if they have a flaslight 
+        if they do then send the response "You are safe"
+        if they don't then redirect them to /monsters
+    */
+    
+
+    res.redirect("/monsters");
+
+    // res.send({ message: "Look under the bed." });
+});
+
+app.get("/monsters", (req, res) => {
+    res.send({ message: "Uh oh! Scary monsters!!!" });
+});
 
 
 app.listen(8080, () => {
