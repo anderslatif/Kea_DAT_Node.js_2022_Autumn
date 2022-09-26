@@ -13,6 +13,15 @@ app.get("/pokemon", (req, res) => {
     res.send({ data: ["Slowpoke"] });
 });
 
-app.listen(8080, (error) => {
-    console.log("Server is running on port", 8080);
+
+// task make sure that the server actually runs on the port in the environment variable if defined
+const PORT = 8080;
+
+console.log(process.env.PORT);
+
+const server = app.listen(8080, (error) => {
+    if (error) {
+        console.log(error);
+    }
+    console.log("Server is running on port", server.address().port);
 });
