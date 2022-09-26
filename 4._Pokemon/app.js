@@ -10,16 +10,17 @@ app.get("/", (req, res) => {
 });
 
 app.get("/pokemon", (req, res) => {
+    // assignment use fetch to get pokemon from the pokeapi and send them as data in the response
+
     res.send({ data: ["Slowpoke"] });
 });
 
 
-// task make sure that the server actually runs on the port in the environment variable if defined
-const PORT = 8080;
 
-console.log(process.env.PORT);
 
-const server = app.listen(8080, (error) => {
+const PORT = process.env.PORT || 8080;
+
+const server = app.listen(PORT, (error) => {
     if (error) {
         console.log(error);
     }
