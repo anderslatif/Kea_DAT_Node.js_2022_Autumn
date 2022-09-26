@@ -6,10 +6,14 @@ app.use(express.static("public"));
 import path from "path";
 
 app.get("/", (req, res) => {
-    res.sendFile(path.resolve("public/frontpage.html"));
+    res.sendFile(path.resolve("public/frontpage/frontpage.html"));
 });
 
-app.get("/pokemon", (req, res) => {
+app.get("/battle", (req, res) => {
+    res.sendFile(path.resolve("public/battle/battle.html"));
+});
+
+app.get("/api/pokemon", (req, res) => {
     fetch("https://pokeapi.co/api/v2/pokemon")
     .then(response => response.json())
     .then(result => res.send({ data: result }));

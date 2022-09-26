@@ -5,7 +5,7 @@ const pokemonDiv = document.getElementById("pokemon");
     window.location.replace("battle");
 }, 3000); */
 
-// fetch("/pokemon")
+// fetch("/api/pokemon")
 // .then(response => response.json())
 // .then(result => {
 //     result.data.results.forEach(pokemon => {
