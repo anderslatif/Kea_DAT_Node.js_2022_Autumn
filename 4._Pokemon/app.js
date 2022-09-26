@@ -10,11 +10,10 @@ app.get("/", (req, res) => {
 });
 
 app.get("/pokemon", (req, res) => {
-    // assignment use fetch to get pokemon from the pokeapi and send them as data in the response
-
-    res.send({ data: ["Slowpoke"] });
+    fetch("https://pokeapi.co/api/v2/pokemon")
+    .then(response => response.json())
+    .then(result => res.send({ data: result }));
 });
-
 
 
 
