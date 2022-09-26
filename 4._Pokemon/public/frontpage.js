@@ -1,5 +1,10 @@
 const pokemonDiv = document.getElementById("pokemon");
 
+/* setTimeout(() => {
+    // window.location.href = "/battle";
+    window.location.replace("battle");
+}, 3000); */
+
 // fetch("/pokemon")
 // .then(response => response.json())
 // .then(result => {
@@ -15,4 +20,4 @@ const pokemonDiv = document.getElementById("pokemon");
     
 // });
 
-// task write code here that takes the user to /battle after 3 seconds
+
