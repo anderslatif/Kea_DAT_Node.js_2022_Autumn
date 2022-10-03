@@ -11,9 +11,19 @@ const navComponent = fs.readFileSync("./public/components/navbar/navbar.html").t
 const footerComponent = fs.readFileSync("./public/components/footer/footer.html").toString();
 
 const frontpage = fs.readFileSync("./public/pages/frontpage/frontpage.html").toString();
+const frontpagePage = navComponent
+                        .replace("%%TAB_TITLE%%", "Pokemon")
+                        .replace("%%PAGE_CSS_LINK%%",
+                        `<link rel="stylesheet" href="./pages/frontpage/frontpage.css">`
+                        ) 
+                        + frontpage + footerComponent;
 
-const frontpagePage = navComponent + frontpage + footerComponent;
-
+const battle = fs.readFileSync("./public/pages/battle/battle.html").toString();
+const battlePage = navComponent
+                    .replace("%%PAGE_CSS_LINK%%",
+                    `<link rel="stylesheet" href="/battle.css">`
+                    ) 
+                    + battle + footerComponent;
 
 app.get("/", (req, res) => {
     res.send(frontpagePage);
@@ -25,7 +35,7 @@ app.get("/battle", (req, res) => {
 });
 
 app.get("/battle/:pokemonName", (req, res) => {
-    res.sendFile(path.resolve("public/battle/battle.html"));
+    res.send(battlePage.replace("%%TAB_TITLE%%", `Battle ${req.params.pokemonName}`));
 });
 
 app.get("/contact", (req, res) => {
