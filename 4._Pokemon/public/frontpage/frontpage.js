@@ -14,7 +14,7 @@ fetch("/api/pokemon")
         pokemonNameP.innerText = pokemon.name;
 
         const battleLink = document.createElement("a");
-        battleLink.setAttribute("href", `/battle`);
+        battleLink.setAttribute("href", `/battle/${pokemon.name}`);
         const battleButton = document.createElement("button");
         battleButton.textContent = `Battle ${pokemon.name}!`;
         battleLink.appendChild(battleButton);

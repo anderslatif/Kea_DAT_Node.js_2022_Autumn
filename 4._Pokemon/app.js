@@ -10,6 +10,11 @@ app.get("/", (req, res) => {
 });
 
 app.get("/battle", (req, res) => {
+    const randomPokemon = "pikachu";
+    res.redirect(`battle/${randomPokemon}`);
+});
+
+app.get("/battle/:pokemonName", (req, res) => {
     res.sendFile(path.resolve("public/battle/battle.html"));
 });
 
