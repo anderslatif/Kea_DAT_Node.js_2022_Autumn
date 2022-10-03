@@ -1,7 +1,7 @@
-// const pathVariables = location.pathname.split("/");
-// const pokemonName = pathVariables.pop();
+const pathVariables = location.pathname.split("/");
+const pokemonName = pathVariables.pop();
 
-// console.log(pokemonName);
+console.log(pokemonName);
 
 // todo start the battle against this pokemon
 // fetch data about this specific pokemon

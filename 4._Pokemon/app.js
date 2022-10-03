@@ -3,27 +3,15 @@ const app = express();
 
 app.use(express.static("public"));
 
-import path from "path";
+import { renderPage, battlePage } from "./util/templateEngine.js";
 
-import fs from "fs";
+const frontpagePage = renderPage("/frontpage/frontpage.html", 
+{ 
+    tabTitle: "Pokemon", 
+    cssLink: `<link rel="stylesheet" href="/pages/frontpage/frontpage.css">` 
+});
 
-const navComponent = fs.readFileSync("./public/components/navbar/navbar.html").toString();
-const footerComponent = fs.readFileSync("./public/components/footer/footer.html").toString();
-
-const frontpage = fs.readFileSync("./public/pages/frontpage/frontpage.html").toString();
-const frontpagePage = navComponent
-                        .replace("%%TAB_TITLE%%", "Pokemon")
-                        .replace("%%PAGE_CSS_LINK%%",
-                        `<link rel="stylesheet" href="./pages/frontpage/frontpage.css">`
-                        ) 
-                        + frontpage + footerComponent;
-
-const battle = fs.readFileSync("./public/pages/battle/battle.html").toString();
-const battlePage = navComponent
-                    .replace("%%PAGE_CSS_LINK%%",
-                    `<link rel="stylesheet" href="/battle.css">`
-                    ) 
-                    + battle + footerComponent;
+const contactPage = renderPage("/contact/contact.html");
 
 app.get("/", (req, res) => {
     res.send(frontpagePage);
@@ -39,7 +27,7 @@ app.get("/battle/:pokemonName", (req, res) => {
 });
 
 app.get("/contact", (req, res) => {
-    res.sendFile(path.resolve("public/contact/contact.html"));
+    res.send(contactPage);
 });
 
 app.get("/api/pokemon", (req, res) => {
