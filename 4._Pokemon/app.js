@@ -5,8 +5,18 @@ app.use(express.static("public"));
 
 import path from "path";
 
+import fs from "fs";
+
+const navComponent = fs.readFileSync("./public/components/navbar/navbar.html").toString();
+const footerComponent = fs.readFileSync("./public/components/footer/footer.html").toString();
+
+const frontpage = fs.readFileSync("./public/pages/frontpage/frontpage.html").toString();
+
+const frontpagePage = navComponent + frontpage + footerComponent;
+
+
 app.get("/", (req, res) => {
-    res.sendFile(path.resolve("public/frontpage/frontpage.html"));
+    res.send(frontpagePage);
 });
 
 app.get("/battle", (req, res) => {
