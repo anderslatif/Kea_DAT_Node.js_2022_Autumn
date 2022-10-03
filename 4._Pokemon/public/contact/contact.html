@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <link rel="stylesheet" href="./frontpage/footer.css">
+
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <nav>
+        <a href="/">LOGO</a>
+
+        <a href="/battle">Battle</a>
+        <a href="/contact">Contact</a>
+    </nav>
+
+
+    <main>
+        <h3>Submit some feedback about the website</h3>
+
+        <form action="/api/contact" method="POST">
+            <label for>Name</label>
+            <input id="name" placeholder="name">
+
+            <label for>Email</label>
+            <input id="email" type="email" placeholder="email">
+
+            <label for="message">Message</label>
+            <textarea placeholder="message" cols="30" rows="15"></textarea>
+
+            <button type="submit">Submit Feedback</button>
+        </form>
+
+    </main>
+
+    <footer>
+        <p id="copyright-year"></p>
+    </footer>
+</body>
+</html>
