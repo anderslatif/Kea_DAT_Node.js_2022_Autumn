@@ -9,7 +9,7 @@ app.get("/", (req, res) => {
     res.sendFile(path.resolve("public/frontpage/frontpage.html"));
 });
 
-app.get("/battle", (req, res) => {
+app.get("/battle/", (req, res) => {
     res.sendFile(path.resolve("public/battle/battle.html"));
 });
 
