@@ -1,2 +1,2 @@
-//task in the footer write: © 2022 
-// it has to be dynamic 
+const copyrightMessage = `© ${new Date().getFullYear()}`;
+document.getElementById("copyright-year").innerText = copyrightMessage;
