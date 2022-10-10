@@ -3,7 +3,7 @@ const app = express();
 
 app.use(express.static("public"));
 
-import { renderPage, battlePage } from "./util/templateEngine.js";
+import { renderPage, injectData } from "./util/templateEngine.js";
 
 const frontpagePage = renderPage("/frontpage/frontpage.html", 
 { 
@@ -12,6 +12,10 @@ const frontpagePage = renderPage("/frontpage/frontpage.html",
 });
 
 const contactPage = renderPage("/contact/contact.html");
+
+const battlePage = renderPage("/battle/battle.html", {
+    cssLink: `<link rel="stylesheet" href="/pages/battle/battle.css">` 
+});
 
 app.get("/", (req, res) => {
     res.send(frontpagePage);
@@ -23,7 +27,9 @@ app.get("/battle", (req, res) => {
 });
 
 app.get("/battle/:pokemonName", (req, res) => {
-    res.send(battlePage.replace("%%TAB_TITLE%%", `Battle ${req.params.pokemonName}`));
+    const pokemonName = req.params.pokemonName;
+    const battlePageWithData = injectData(battlePage, { pokemonName });
+    res.send(battlePageWithData.replace("%%TAB_TITLE%%", `Battle ${req.params.pokemonName}`));
 });
 
 app.get("/contact", (req, res) => {
@@ -46,3 +52,8 @@ const server = app.listen(PORT, (error) => {
     }
     console.log("Server is running on port", server.address().port);
 });
+
+
+function addA(someString) {
+    return someString + "A";
+}
