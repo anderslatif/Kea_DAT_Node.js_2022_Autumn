@@ -21,15 +21,15 @@ app.get("/", (req, res) => {
     res.send(frontpagePage);
 });
 
-app.get("/battle", (req, res) => {
-    const randomPokemon = "pikachu";
-    res.redirect(`battle/${randomPokemon}`);
+const randomPokemon = ["pikachu", "slowpoke", "ditto"];
+app.get("/battle", (req, res) => {   
+    res.redirect(`battle/${randomPokemon[Math.floor(Math.random() * randomPokemon.length)]}`);
 });
 
 app.get("/battle/:pokemonName", (req, res) => {
     const pokemonName = req.params.pokemonName;
-    const battlePageWithData = injectData(battlePage, { pokemonName });
-    res.send(battlePageWithData.replace("%%TAB_TITLE%%", `Battle ${req.params.pokemonName}`));
+    // const battlePageWithData = injectData(battlePage, { pokemonName });
+    res.send(battlePage.replace("%%TAB_TITLE%%", `Battle ${req.params.pokemonName}`));
 });
 
 app.get("/contact", (req, res) => {
