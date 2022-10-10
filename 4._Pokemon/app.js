@@ -3,6 +3,9 @@ const app = express();
 
 app.use(express.static("public"));
 
+import pokemonRouter from "./routers/pokemonRouter.js";
+app.use(pokemonRouter);
+
 import { renderPage, injectData } from "./util/templateEngine.js";
 
 const frontpagePage = renderPage("/frontpage/frontpage.html", 
@@ -28,18 +31,12 @@ app.get("/battle", (req, res) => {
 
 app.get("/battle/:pokemonName", (req, res) => {
     const pokemonName = req.params.pokemonName;
-    // const battlePageWithData = injectData(battlePage, { pokemonName });
-    res.send(battlePage.replace("%%TAB_TITLE%%", `Battle ${req.params.pokemonName}`));
+    const battlePageWithData = injectData(battlePage, { pokemonName });
+    res.send(battlePageWithData.replace("%%TAB_TITLE%%", `Battle ${req.params.pokemonName}`));
 });
 
 app.get("/contact", (req, res) => {
     res.send(contactPage);
-});
-
-app.get("/api/pokemon", (req, res) => {
-    fetch("https://pokeapi.co/api/v2/pokemon")
-    .then(response => response.json())
-    .then(result => res.send({ data: result }));
 });
 
 
