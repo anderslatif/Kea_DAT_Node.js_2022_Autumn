@@ -19,11 +19,13 @@ const frontpagePage = renderPage("/frontpage/frontpage.html",
     cssLink: `<link rel="stylesheet" href="/pages/frontpage/frontpage.css">` 
 });
 
-const contactPage = renderPage("/contact/contact.html");
-
 const battlePage = renderPage("/battle/battle.html", {
     cssLink: `<link rel="stylesheet" href="/pages/battle/battle.css">` 
 });
+
+const battleResultsPage = renderPage("/battleResults/battleResults.html");
+
+const contactPage = renderPage("/contact/contact.html");
 
 app.get("/", (req, res) => {
     res.send(frontpagePage);
@@ -38,6 +40,10 @@ app.get("/battle/:pokemonName", (req, res) => {
     const pokemonName = req.params.pokemonName;
     const battlePageWithData = injectData(battlePage, { pokemonName });
     res.send(battlePageWithData.replace("%%TAB_TITLE%%", `Battle ${req.params.pokemonName}`));
+});
+
+app.get("/battleResults", (req, res) => {
+    res.send(battleResultsPage);
 });
 
 app.get("/contact", (req, res) => {
