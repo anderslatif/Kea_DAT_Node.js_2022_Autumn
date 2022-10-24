@@ -21,7 +21,16 @@ fetch(`https://pokeapi.co/api/v2/pokemon/${pokemonName}`)
         whoWonHeader.innerText = "You lost!";
     }
 
-    // todo call our backend with the information
+    const body = { 
+        pokemonBattled: pokemon.name,
+        iWon 
+    };
+
+    fetch("/api/battles", {
+        method: "POST",
+        body: JSON.stringify(body),
+        headers: { "Content-type": "application/json" }
+    });
 
 });
 

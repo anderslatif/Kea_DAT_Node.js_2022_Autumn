@@ -1,10 +1,13 @@
 import express from "express";
 const app = express();
 
+app.use(express.json());
 app.use(express.static("public"));
 
 import pokemonRouter from "./routers/pokemonRouter.js";
 app.use(pokemonRouter);
+import battleRouter from "./routers/battleRouter.js";
+app.use(battleRouter);
 
 import { renderPage, injectData } from "./util/templateEngine.js";
 
