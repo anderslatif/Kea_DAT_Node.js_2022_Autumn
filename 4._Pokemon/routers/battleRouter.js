@@ -13,4 +13,7 @@ router.post("/api/battles", (req, res) => {
     res.send({ message: "Results received" });
 });
 
-export default router;
+export default {
+    router,
+    battleResults
+};

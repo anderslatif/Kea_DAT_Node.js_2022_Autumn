@@ -7,7 +7,9 @@ app.use(express.static("public"));
 import pokemonRouter from "./routers/pokemonRouter.js";
 app.use(pokemonRouter);
 import battleRouter from "./routers/battleRouter.js";
-app.use(battleRouter);
+app.use(battleRouter.router);
+import battleResultsRouter from "./routers/battleResultsRouter.js";
+app.use(battleResultsRouter);
 
 import { renderPage, injectData } from "./util/templateEngine.js";
 
