@@ -20,8 +20,14 @@
 </script>
 
 <h1>Hi I'm {name}.</h1>
-<div on:click={handleEraseFridgeBulletin} on:keydown={() => {}}>Erase the fridge bulletin.</div>
+<div class="erase-fridge-bulletin-div" on:click={handleEraseFridgeBulletin} on:keydown={() => {}}>Erase the fridge bulletin.</div>
 
 {#each children as child}
     <Child child={child} parentName={name} onAlwaysSayHi={handleAlwaysSayHi} onTellILoveYou={handleTellILoveYou} />
 {/each}
+
+<style>
+    .erase-fridge-bulletin-div {
+        user-select: none;
+    }
+</style>

@@ -1,0 +1,1 @@
+<h3 class:girl={isGirl} class={stereotype || "no-stereotype"}>Hi my name is {name}.</h3>

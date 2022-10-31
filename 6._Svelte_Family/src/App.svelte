@@ -6,10 +6,11 @@
   const children = [
     {
       name: "Flemming",
-      blackSheep: true
+      blackSheep: "ultra-blacksheep"
     },
     {
       name: "Erik",
+      blackSheep: "medium-blacksheep",
       brightKid: true
     },
     {
@@ -18,6 +19,7 @@
       brightKid: true
     },
   ];
+
   const pets = [
     { type: "Panda", "name": "Poh" },
     { type: "Dinosaur", "name": "Little Foot" }
