@@ -23,11 +23,15 @@ Can have two different states:
 - Pending
 - Fulfilled
         - Resolved, Rejected
+
+Solution 3:
+Introducing async/await. 
+Again syntactic sugar. 
 */
 
 new Promise((resolve, reject) =>  {
     try {
-        throw Error;
+        // throw Error;
         resolve("Yay");
     } catch (stackTrace) {
         reject("Nay");
@@ -36,8 +40,51 @@ new Promise((resolve, reject) =>  {
 .then(successMessage => console.log(successMessage))
 .catch(errorMessage => console.log(errorMessage));
 
-/* assignment implement a new Promise in a function called somethingGoodSomethingBad
-the function should return the Promise
 
-bonus: Implement a 3 second delay in the Promise to simulate asynchronous code
- */
+function howAwesomeAmI(name) {
+    return new Promise((resolve, reject) => {
+        resolve(`${name} is very awesome`);
+    });
+}
+
+howAwesomeAmI("Anders")
+.then(answer => console.log(answer)); 
+
+
+
+function somethingGoodSomethingBad() {
+    return new Promise((resolve, reject) => {
+        setTimeout(() => {
+            try {
+                // throw new Error("Bad")
+                resolve("Good");
+            } catch {
+                reject("Bad");
+            }
+        }, 3000);
+    });
+}
+
+// somethingGoodSomethingBad()
+// .then(shouldBeGood => console.log(shouldBeGood))
+// .catch(shouldBeBad => console.log(shouldBeBad));
+
+// const shouldBeGood = await somethingGoodSomethingBad();
+
+// IIFE
+(async function asyncAwaitExample() {
+    try {
+        const shouldBeGood = await somethingGoodSomethingBad();
+        const awesomeMessage = await howAwesomeAmI("Emilie");
+
+        console.log(shouldBeGood, awesomeMessage);
+    } catch (errorMessage) {
+        console.log(errorMessage);
+    }
+
+})()
+
+const shouldBeGood = async () => {
+    return await somethingGoodSomethingBad()
+}
+console.log(shouldBeGood());
