@@ -2,7 +2,12 @@
     export let name;
     export let children;
 
+    import { fridgeMessageStore } from "../../store/fridgeBulletinStore";
     import Child from "../Child/Child.svelte";
+
+    function handleEraseFridgeBulletin() {
+        fridgeMessageStore.set("Write your message...");
+    }
 
     function handleAlwaysSayHi() {
         console.log("Hi");
@@ -15,6 +20,8 @@
 </script>
 
 <h1>Hi I'm {name}.</h1>
+<div on:click={handleEraseFridgeBulletin} on:keydown={() => {}}>Erase the fridge bulletin.</div>
+
 {#each children as child}
     <Child child={child} parentName={name} onAlwaysSayHi={handleAlwaysSayHi} onTellILoveYou={handleTellILoveYou} />
 {/each}
