@@ -1,6 +1,7 @@
 import express from "express";
 const app = express();
 
+app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(express.static("public"));
 
@@ -10,6 +11,8 @@ import battleRouter from "./routers/battleRouter.js";
 app.use(battleRouter.router);
 import battleResultsRouter from "./routers/battleResultsRouter.js";
 app.use(battleResultsRouter);
+import contactRouter from "./routers/contactRouter.js";
+app.use(contactRouter);
 
 import { renderPage, injectData } from "./util/templateEngine.js";
 
