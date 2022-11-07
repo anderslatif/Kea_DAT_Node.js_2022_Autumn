@@ -1,6 +1,26 @@
 import express from "express";
 const app = express();
 
+import helmet from "helmet";
+app.use(helmet());
+
+import rateLimit from "express-rate-limit";
+
+const generalLimiter = rateLimit({
+    windowMs: 10 * 60 * 1000,
+    max: 80
+});
+app.use(generalLimiter);
+
+const frontdoorLimiter = rateLimit({
+	windowMs: 15 * 60 * 1000, // 15 minutes
+	max: 6, // Limit each IP to 6 requests per `window` (here, per 15 minutes)
+	standardHeaders: true, // Return rate limit info in the `RateLimit-*` headers
+	legacyHeaders: false, // Disable the `X-RateLimit-*` headers
+});
+app.use("/frontdoor", frontdoorLimiter);
+
+
 /* Middleware functions */
 function ipLogger(req, res, next) {
     console.log(req.ip);
@@ -13,12 +33,12 @@ function guidingButler(req, res, next) {
 }
 
 /* Setup middleware */
-app.use(ipLogger);
+// app.use(ipLogger);
 app.use("/room", guidingButler);
 
 
 function guardMiddleware(req, res, next) {
-    if (!req.query && req.query.name !== "Anders") {
+    if (req.query.name !== "Anders") {
         res.send({ message: "You are not Anders! Go away." });
     }
 

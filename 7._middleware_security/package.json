@@ -24,6 +24,9 @@
   },
   "homepage": "https://github.com/anderslatif/Kea_DAT_Node.js_2022_Autumn#readme",
   "dependencies": {
-    "express": "^4.18.2"
+    "bcrypt": "^5.1.0",
+    "express": "^4.18.2",
+    "express-rate-limit": "^6.6.0",
+    "helmet": "^6.0.0"
   }
 }
