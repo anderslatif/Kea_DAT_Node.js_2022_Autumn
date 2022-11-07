@@ -4,6 +4,15 @@ const app = express();
 import helmet from "helmet";
 app.use(helmet());
 
+import session from "express-session";
+app.use(session({
+    secret: 'keyboard cat',
+    resave: false,
+    saveUninitialized: true,
+    cookie: { secure: false }
+}));
+  
+
 import rateLimit from "express-rate-limit";
 
 const generalLimiter = rateLimit({
@@ -35,6 +44,9 @@ function guidingButler(req, res, next) {
 /* Setup middleware */
 // app.use(ipLogger);
 app.use("/room", guidingButler);
+
+import popcornRouter from "./routers/popcornRouter.js";
+app.use(popcornRouter);
 
 
 function guardMiddleware(req, res, next) {
