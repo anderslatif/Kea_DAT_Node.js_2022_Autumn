@@ -1,3 +1,6 @@
+import dotenv from "dotenv/config";
+// dotenv.config();
+
 import express from "express";
 const app = express();
 
@@ -6,12 +9,12 @@ app.use(helmet());
 
 import session from "express-session";
 app.use(session({
-    secret: 'keyboard cat',
+    secret: process.env.SESSION_SECRET,
     resave: false,
     saveUninitialized: true,
     cookie: { secure: false }
 }));
-  
+
 
 import rateLimit from "express-rate-limit";
 
