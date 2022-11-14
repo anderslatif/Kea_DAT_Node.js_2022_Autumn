@@ -4,9 +4,13 @@ const app = express();
 // import path from "path";
 // app.use(express.static(path.resolve("../client/dist")));
 
+import cors from "cors";
+app.use(cors());
 
-app.get("/api/test", (req, res) => {
-    res.send({ message: "You found me" });
+const animals = ["🦩", "🐶", "🦍", "🦄", "🦄", "🦚"];
+
+app.get("/api/animals", (req, res) => {
+    res.send({ data: animals });
 });
 
 const PORT = 8080 || process.env.PORT;
