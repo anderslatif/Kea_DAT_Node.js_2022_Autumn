@@ -5,14 +5,20 @@
   "type": "module",
   "main": "app.js",
   "scripts": {
+    "create-database": "node ./database/ddl_sqlite.js",
+    "setup": "concurrently 'npm run create-database' 'echo Database created. Now run npm run start.'",
+    "start": "node app.js",
+    "start-dev": "nodemon app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "concurrently": "^7.6.0",
     "cors": "^2.8.5",
     "express": "^4.18.2",
+    "mysql2": "^2.3.3",
     "sqlite": "^4.1.2",
     "sqlite3": "^5.1.2"
   }
