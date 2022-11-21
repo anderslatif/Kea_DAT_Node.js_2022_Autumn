@@ -25,7 +25,7 @@ db.execute(`CREATE TABLE IF NOT EXISTS animal_feed_stock (
     remaining_amount INTEGER,
     addded_to_stock TIMESTAMP NOT NULL DEFAULT NOW(),
     animal_feed_type_id INTEGER,
-    CONSTRAINT fk_feed_type FOREIGN KEY (id) REFERENCES animal_feed_types(id)
+    CONSTRAINT fk_feed_type FOREIGN KEY (animal_feed_type_id) REFERENCES animal_feed_types(id)
 );
 `);
 
