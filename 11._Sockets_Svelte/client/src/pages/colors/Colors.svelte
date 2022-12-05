@@ -8,6 +8,7 @@
     socket.on("update the color", (data) => {
         // don't use document ... do it the Svelte way but...
         document.body.style.backgroundColor = data.data;
+        console.log(data.username);
     });
 
     function sendColor() {
