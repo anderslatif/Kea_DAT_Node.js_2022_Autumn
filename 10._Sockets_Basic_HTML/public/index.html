@@ -9,9 +9,21 @@
 <body>
     <h1>Crazy color page</h1>
 
+    <input id="color-picker" type="color">
+    <button onclick="sendColor()">Send color</button>
+
     <script src="/socket.io/socket.io.js"></script>
     <script>
         const socket = io();
+
+        function sendColor() {
+            const color = document.getElementById("color-picker").value;
+            socket.emit("client choose a color", { data: color });
+        }
+
+        socket.on("this is the new color", (data) => {
+            document.body.style.backgroundColor = data.data;
+        });
     </script>    
 </body>
 </html>
