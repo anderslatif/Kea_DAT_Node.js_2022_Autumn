@@ -1,22 +1,20 @@
 <script>
     import { onMount } from "svelte";
-    import { BASE_URL } from "./stores/globalStore";
+    import { BASE_URL, username } from "./stores/globalStore";
 
-    import Colors from "./pages/colors/Colors.svelte";
-    import Register from "./pages/register/Register.svelte";
+    import Colors from "./pages/Colors/Colors.svelte";
+    import Register from "./pages/Register/Register.svelte";
 
-    let loggedInUser = undefined;
 
     onMount(async () => {
-        const response = await fetch($BASE_URL + "/me", {
-            credentials: "include"
-        });
+        const response = await fetch($BASE_URL + "/me");
         const { data } = await response.json();
-        loggedInUser = data;
+        console.log(data)
+        username.set(data);
     });
 </script>
 
-{#if loggedInUser}
+{#if $username}
     <Colors />
 {:else}
     <Register />

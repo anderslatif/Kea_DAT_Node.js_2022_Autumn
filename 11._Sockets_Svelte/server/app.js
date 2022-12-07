@@ -12,6 +12,9 @@ const io = new Server(server,  {
     }
 });
 
+import path from "path";
+app.use(express.static(path.resolve("../client/dist")));
+
 app.use(express.json());
 import session from "express-session";
 const sessionMiddleware = session({
@@ -19,8 +22,6 @@ const sessionMiddleware = session({
     resave: false,
     saveUninitialized: true
 });
-import cors from "cors";
-app.use(cors({ credentials: true, origin: true }));
 app.use(sessionMiddleware);
 import registrationRouter from "./routers/registrationRouter.js";
 app.use(registrationRouter);
@@ -32,7 +33,6 @@ io.use(wrap(sessionMiddleware));
 io.on("connection", (socket) => {
     socket.on("client choose a new color", (data) => {
         data.username = socket.request.session.username;
-        console.log(socket.request.session);
         io.emit("update the color", data);
     });
 });

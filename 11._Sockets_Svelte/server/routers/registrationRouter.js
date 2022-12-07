@@ -7,8 +7,9 @@ router.get("/me", (req, res) => {
 });
 
 router.get("/logout", (req, res) => {
-    req.session.destroy();
-    res.send({});
+    req.session.destroy(() => {
+        res.send({});
+    });
 });
 
 router.post("/registerMyUser", (req, res) => {
