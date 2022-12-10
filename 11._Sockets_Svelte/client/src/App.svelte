@@ -1,18 +1,27 @@
 <script>
     import { onMount } from "svelte";
-    import { BASE_URL, username } from "./stores/globalStore";
+    import { BASE_URL, ENVIRONMENT, username  } from "./stores/globalStore";
+
+    import io from "socket.io-client";
 
     import Colors from "./pages/Colors/Colors.svelte";
     import Register from "./pages/Register/Register.svelte";
 
+    const socket = io();
 
     onMount(async () => {
+        if ($ENVIRONMENT === "DEVELOPMENT") {
+            socket.on("update the page", () => {
+                location.reload();
+            });
+        }
+ 
         const response = await fetch($BASE_URL + "/me");
         const { data } = await response.json();
-        console.log(data)
         username.set(data);
     });
 </script>
+
 
 {#if $username}
     <Colors />

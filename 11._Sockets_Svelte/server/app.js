@@ -5,15 +5,23 @@ import "dotenv/config";
 
 const app = express();
 const server = http.createServer(app);
-const io = new Server(server,  {
-    cors: {
-      origin: "http://localhost:5173",
-      methods: ["GET", "POST", "PUT", "PATCH", "DELETE"]
-    }
-});
+const io = new Server(server);
 
 import path from "path";
-app.use(express.static(path.resolve("../client/dist")));
+import chokidar from "chokidar";
+
+const distFolderPath = path.resolve("../client/dist/");
+
+if (process.env.NODE_ENV === "DEVELOPMENT") {
+    app.use((req, res, next) => {
+        res.setHeader('Content-Security-Policy',"default-src 'self' 'unsafe-inline' http://localhost:8080");
+        next();
+    });
+    app.use(express.static(distFolderPath));
+    app.get("*", (req, res) => {
+        res.sendFile(path.resolve(distFolderPath, "index.html"));
+    });
+}
 
 app.use(express.json());
 import session from "express-session";
@@ -29,6 +37,15 @@ app.use(registrationRouter);
 const wrap = middleware => (socket, next) => middleware(socket.request, {}, next);
 io.use(wrap(sessionMiddleware));
 
+if (process.env.NODE_ENV === "DEVELOPMENT") {
+    chokidar.watch(distFolderPath,
+        {
+            awaitWriteFinish: {
+                stabilityThreshold: 2000
+            }
+        })
+    .on("change", () => io.emit("update the page"));
+}
 
 io.on("connection", (socket) => {
     socket.on("client choose a new color", (data) => {

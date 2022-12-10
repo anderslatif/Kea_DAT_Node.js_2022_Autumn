@@ -1,10 +1,12 @@
 <script>
     import { colorChangesList } from "../../stores/colorChangesList";
-    import io from "socket.io-client";
+
     import ColorChangesWidget from "../../components/ColorChangesWidget/ColorChangesWidget.svelte";
 
     let colorValue = "#000000";
 
+    import io from "socket.io-client";
+    import LogOutButton from "../../components/LogOutButton/LogOutButton.svelte";
     const socket = io();
 
     socket.on("update the color", (data) => {
@@ -13,7 +15,6 @@
         colorChangesList.update((currentColorChangesList) => {
             return [data, ...currentColorChangesList];
         });
-        console.log($colorChangesList)
     });
 
     function sendColor() {
@@ -21,7 +22,10 @@
     }
 </script>
 
+<LogOutButton />
+
 <input bind:value={colorValue} type="color">
 <button on:click={sendColor}>Send color</button>
+
 
 <ColorChangesWidget />
