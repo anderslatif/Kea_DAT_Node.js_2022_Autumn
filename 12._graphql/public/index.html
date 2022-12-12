@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GraphQL</title>
+</head>
+<body>
+    <h1>GraphQL</h1>
+
+    <label>Key:</label>
+    <div id="key"></div>
+
+    <br>
+    <br>
+
+    <label>Value:</label>
+    <div id="value"></div>
+
+    <script>
+        const greetingsQuery = `
+            query {
+                hello
+            }
+        `;
+
+        fetch("/graphql", {
+            method: "POST", 
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                query: greetingsQuery
+            })
+        })
+        .then(response => response.json())
+        .then(result => {
+
+            document.getElementById("key").innerText = Object.keys(result.data)[0];
+            document.getElementById("value").innerText = result.data.hello;
+        });
+
+    </script>
+</body>
+</html>

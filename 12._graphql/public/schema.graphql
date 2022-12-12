@@ -1,0 +1,5 @@
+Type User {
+    id: Int!
+    name: String!
+    likes: Int
+}
